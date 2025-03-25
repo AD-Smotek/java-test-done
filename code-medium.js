@@ -1,33 +1,62 @@
-// oblast definice funkcí
+// 1) Funkce co vrací string, který odpovídá slovu ze stringInput na pozici dané wordIndex
+function capitalizeWord(stringInput, wordIndex) {
+  const words = stringInput.split(' ');  // rozdělíme text na slova
+  const index = wordIndex - 1;  // protože indexování začíná od 0, ale zadáváme index od 1
+  if (words[index]) {
+    return words[index].toUpperCase();  // vrátí slovo velkými písmeny
+  }
+  return '';  // pokud slovo na dané pozici neexistuje, vrátí prázdný string
+}
 
-// 1) Funkce co vrací string, který odpovídá slovu (jsou oddělena mezerou) ze stringInput na pozici dané wordIndex (od 1), pokud index není vyplněn pracuje se s prvním slovem, vrácené slovo bude velkými písmeny, pokud slovo na dané pozici neexistuje, vrátí se prázdný string
-// například pro "My cat is yellow?" a 3 bude výsledek "IS"
-function capitalizeWord(stringInput, wordIndex) {}
+// 2) Funkce co přijme testScore a vrátí odpovídající známku
+function transformScoreToGrade(testScore) {
+  if (typeof testScore !== 'number' || testScore < 0 || testScore > 100) {
+    return 'INVALID SCORE';  // pokud je testScore mimo rozsah nebo nevalidní hodnota
+  }
 
-// 2) Funkce co přijme testScore, a vrátí odpovídající známku podle následující tabulky:
-// 0-50 -> F, 51-60 -> E, 61-70 -> D, 71-80 -> C, 81-90 -> B, 91-100 -> A, pokud je testScore mimo rozsah 0-100, nebo nevalidní hodnota funkce vrátí "INVALID SCORE"
-// například pro 75 bude výsledek "C"
-function transformScoreToGrade(testScore) {}
+  if (testScore <= 50) return 'F';
+  if (testScore <= 60) return 'E';
+  if (testScore <= 70) return 'D';
+  if (testScore <= 80) return 'C';
+  if (testScore <= 90) return 'B';
+  return 'A';  // pro testScore 91-100
+}
 
-// 3) Funkce na výpočet factorialu, pomocí cyklu, vstupem je factorialNumber, výstupem bude výsledek faktoriálu
-// nevalidní vstupem je záporné číslo, nebo nečíslo, v takovém případě funkce vrátí undefined
-// faktoriál je součin všech kladných celých čísel menších nebo rovných zadanému číslu; pozor faktoriál čísla 0 je 1
-// například pro 5 bude výsledek 120; vzorec: 5! = 5 * 4 * 3 * 2 * 1 = 120
-function factorial(factorialNumber) {}
+// 3) Funkce na výpočet faktoriálu
+function factorial(factorialNumber) {
+  if (typeof factorialNumber !== 'number' || factorialNumber < 0) {
+    return undefined;  // nevalidní vstup
+  }
+
+  let result = 1;
+  for (let i = 1; i <= factorialNumber; i++) {
+    result *= i;  // součin všech čísel
+  }
+  return result;
+}
 
 // oblast volání funkcí
 
 // 1)
 const result1 = capitalizeWord("My cat is yellow?", 3);
-console.log(result1);
+console.log(result1);  // Očekává se: "IS"
 
 // 2)
 const result2 = transformScoreToGrade(75);
-console.log(result2);
+console.log(result2);  // Očekává se: "C"
 
 // 3)
 const result3 = factorial(5);
-console.log(result3);
+console.log(result3);  // Očekává se: 120
+
+// do kódu níže nezasahujte
+
+module.exports = {
+  variant: "1A",
+  capitalizeWord,
+  transformScoreToGrade,
+  factorial,
+};
 
 // do kódu níže nezasahujte
 
